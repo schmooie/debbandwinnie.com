@@ -1,0 +1,654 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    background-color: #4682b4;
+    color: #333;
+    line-height: 1.4;
+}
+
+a {
+    color: #003399;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #ff5a00;
+}
+
+/* Header */
+.header {
+    background-color: #003366;
+    padding: 8px 0;
+    border-bottom: 2px solid #ff5a00;
+}
+
+.header-content {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.logo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    font-family: Arial Black, sans-serif;
+    letter-spacing: -1px;
+}
+
+.logo span {
+    color: #ff5a00;
+}
+
+.header-nav {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.header-nav a {
+    color: #99ccff;
+    text-decoration: none;
+    font-size: 10px;
+}
+
+.header-nav a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+/* Sub Header */
+.sub-header {
+    background-color: #5a8bb8;
+    padding: 4px 0;
+    border-bottom: 1px solid #4a7aa8;
+}
+
+.sub-header-content {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    gap: 15px;
+    padding: 0 10px;
+}
+
+.sub-header a {
+    color: white;
+    text-decoration: none;
+    font-size: 10px;
+}
+
+.sub-header a:hover {
+    text-decoration: underline;
+}
+
+/* Main Container */
+.container {
+    max-width: 960px;
+    margin: 10px auto;
+    display: flex;
+    gap: 8px;
+    padding: 0 10px;
+}
+
+/* Left Column */
+.left-column {
+    width: 300px;
+    flex-shrink: 0;
+}
+
+/* Right Column */
+.right-column {
+    flex: 1;
+}
+
+/* Profile Box */
+.profile-box {
+    background-color: #fff;
+    border: 1px solid #336699;
+    margin-bottom: 8px;
+}
+
+.profile-box-header {
+    background-color: #5a8bb8;
+    color: white;
+    padding: 4px 8px;
+    font-weight: bold;
+    font-size: 11px;
+}
+
+.profile-box-content {
+    padding: 8px;
+}
+
+/* Band Header */
+.band-header {
+    background-color: #fff;
+    border: 1px solid #336699;
+    margin-bottom: 8px;
+    padding: 10px;
+}
+
+.band-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #003399;
+    margin-bottom: 3px;
+}
+
+.band-tagline {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 8px;
+    font-size: 11px;
+}
+
+.band-stats {
+    display: flex;
+    gap: 15px;
+    font-size: 10px;
+    color: #666;
+}
+
+.band-stats strong {
+    color: #003399;
+}
+
+/* Profile Image */
+.profile-image {
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.profile-image img {
+    width: 100%;
+    display: block;
+    border: 1px solid #999;
+}
+
+/* Online Status */
+.online-status {
+    text-align: center;
+    padding: 4px;
+    background-color: #dff0d8;
+    border: 1px solid #3c763d;
+    margin-bottom: 8px;
+    font-size: 10px;
+    color: #3c763d;
+}
+
+.online-status .online-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #3c763d;
+    border-radius: 50%;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+/* Contact Box */
+.contact-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.contact-table td {
+    padding: 4px;
+    text-align: center;
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+}
+
+.contact-table a {
+    display: block;
+    font-size: 10px;
+    text-decoration: none;
+}
+
+.contact-table a:hover {
+    text-decoration: underline;
+}
+
+/* Add Button */
+.add-button {
+    display: block;
+    background-color: #ff5a00;
+    color: white;
+    text-align: center;
+    padding: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 11px;
+    border: 1px solid #cc4800;
+    margin-bottom: 8px;
+}
+
+.add-button:hover {
+    background-color: #ff7722;
+    color: white;
+}
+
+/* Band Details */
+.details-table {
+    width: 100%;
+    font-size: 10px;
+}
+
+.details-table td {
+    padding: 2px 4px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+}
+
+.details-table td:first-child {
+    font-weight: bold;
+    color: #003399;
+    width: 90px;
+}
+
+/* Extended Network Banner */
+.network-banner {
+    background-color: #ffeecc;
+    border: 1px solid #ffcc66;
+    padding: 8px;
+    text-align: center;
+    margin-bottom: 8px;
+    font-size: 11px;
+    color: #996600;
+}
+
+/* Blurbs */
+.blurb-section {
+    margin-bottom: 12px;
+}
+
+.blurb-title {
+    color: #ff5a00;
+    font-weight: bold;
+    font-size: 11px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 2px;
+}
+
+.blurb-content {
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+/* Tour Dates */
+.tour-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10px;
+}
+
+.tour-table th {
+    background-color: #5a8bb8;
+    color: white;
+    padding: 4px 6px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.tour-table td {
+    padding: 4px 6px;
+    border-bottom: 1px solid #ddd;
+}
+
+.tour-table tr:nth-child(even) {
+    background-color: #f5f5f5;
+}
+
+/* Top Friends */
+.friends-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.friend-item {
+    text-align: center;
+}
+
+.friend-item img {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+    border: 1px solid #999;
+    display: block;
+    margin: 0 auto 4px;
+}
+
+.friend-item a {
+    font-size: 10px;
+    word-break: break-word;
+}
+
+/* Comments */
+.comment {
+    display: flex;
+    gap: 8px;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    background-color: #fafafa;
+}
+
+.comment:nth-child(even) {
+    background-color: #fff;
+}
+
+.comment-avatar {
+    width: 50px;
+    flex-shrink: 0;
+}
+
+.comment-avatar img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border: 1px solid #999;
+}
+
+.comment-content {
+    flex: 1;
+}
+
+.comment-meta {
+    font-size: 10px;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.comment-meta a {
+    font-weight: bold;
+}
+
+.comment-text {
+    font-size: 11px;
+}
+
+/* Player Placeholder */
+.player-placeholder {
+    background-color: #1a1a1a;
+    color: #999;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #333;
+}
+
+.player-placeholder p {
+    font-size: 10px;
+    margin-top: 10px;
+}
+
+/* Footer */
+.footer {
+    background-color: #003366;
+    color: #99ccff;
+    text-align: center;
+    padding: 12px;
+    font-size: 10px;
+    margin-top: 15px;
+}
+
+.footer a {
+    color: #ffcc66;
+}
+
+.footer a:hover {
+    color: #fff;
+}
+
+/* URL Display */
+.url-display {
+    background-color: #ffffcc;
+    border: 1px solid #cccc66;
+    padding: 4px 6px;
+    font-size: 10px;
+    margin-bottom: 8px;
+    word-break: break-all;
+}
+
+.url-display strong {
+    color: #666600;
+}
+
+/* View Count */
+.view-count {
+    text-align: center;
+    font-size: 10px;
+    color: #666;
+    padding: 4px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    margin-bottom: 8px;
+}
+
+/* Mood */
+.mood {
+    font-size: 10px;
+    padding: 4px 6px;
+    background-color: #fff8dc;
+    border: 1px solid #ddc;
+    margin-bottom: 8px;
+}
+
+.mood strong {
+    color: #996600;
+}
+
+/* View All Links */
+.view-all {
+    text-align: right;
+    margin-top: 8px;
+    font-size: 10px;
+}
+
+/* Comment Actions */
+.comment-actions {
+    padding: 8px;
+    text-align: right;
+}
+
+/* ===================
+   RESPONSIVE STYLES
+   =================== */
+
+/* Tablet and below */
+@media (max-width: 768px) {
+    /* Header */
+    .header-content {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .header-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px 12px;
+    }
+
+    .sub-header-content {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px 12px;
+    }
+
+    /* Main layout - stack columns */
+    .container {
+        flex-direction: column;
+    }
+
+    .left-column {
+        width: 100%;
+    }
+
+    .right-column {
+        width: 100%;
+    }
+
+    /* Friends grid - 4 columns still works on tablet */
+    .friends-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    /* Tour table - horizontal scroll */
+    .tour-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+    body {
+        font-size: 12px;
+    }
+
+    /* Header - hide most nav items on mobile */
+    .header-nav {
+        display: none;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .sub-header-content {
+        gap: 6px 10px;
+        font-size: 9px;
+    }
+
+    .sub-header a {
+        font-size: 9px;
+    }
+
+    /* Container */
+    .container {
+        padding: 0 5px;
+        gap: 5px;
+    }
+
+    /* Band header */
+    .band-name {
+        font-size: 18px;
+    }
+
+    .band-stats {
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    /* Profile boxes */
+    .profile-box-header {
+        font-size: 12px;
+        padding: 6px 8px;
+    }
+
+    .profile-box-content {
+        padding: 8px;
+    }
+
+    /* Contact table */
+    .contact-table td {
+        padding: 6px 4px;
+        font-size: 10px;
+    }
+
+    /* Details table */
+    .details-table td:first-child {
+        width: 80px;
+    }
+
+    /* Friends grid - 2 columns on mobile */
+    .friends-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .friend-item img {
+        width: 60px;
+        height: 60px;
+    }
+
+    /* Comments */
+    .comment {
+        padding: 8px;
+        gap: 8px;
+    }
+
+    .comment-avatar {
+        width: 40px;
+    }
+
+    .comment-avatar img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .comment-text {
+        font-size: 11px;
+    }
+
+    /* Tour table */
+    .tour-table th,
+    .tour-table td {
+        padding: 6px 4px;
+        font-size: 10px;
+    }
+
+    /* Blurbs */
+    .blurb-title {
+        font-size: 12px;
+    }
+
+    .blurb-content {
+        font-size: 11px;
+    }
+
+    /* Add button */
+    .add-button {
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    /* Footer */
+    .footer {
+        padding: 10px;
+        font-size: 9px;
+    }
+
+    /* Network banner */
+    .network-banner {
+        font-size: 11px;
+        padding: 8px;
+    }
+}
+
+/* Small phones */
+@media (max-width: 360px) {
+    .sub-header-content {
+        justify-content: flex-start;
+    }
+
+    .friends-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .contact-table td {
+        font-size: 9px;
+    }
+}
