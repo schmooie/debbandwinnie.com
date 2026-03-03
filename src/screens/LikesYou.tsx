@@ -15,7 +15,7 @@ export default function LikesYou() {
             onClick={() => navigate(`/profile/${profile.id}`)}
             className="relative aspect-square overflow-hidden rounded-lg bg-card-bg"
           >
-            {profile.type === 'person' ? (
+            {profile.image ? (
               <img
                 src={profile.image}
                 alt={profile.name}
@@ -24,7 +24,7 @@ export default function LikesYou() {
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center text-4xl">
-                🎵
+                {profile.type === 'tourDates' ? '🎟️' : '🎵'}
               </div>
             )}
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
