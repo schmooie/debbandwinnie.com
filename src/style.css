@@ -7,16 +7,6 @@
   --color-card-bg:      #1a1033;
 }
 
-/* Swipe animation classes toggled by JS */
-.card-swipe-left  { transform: translateX(-120%) rotate(-25deg); opacity: 0; transition: transform 0.3s ease, opacity 0.2s ease; }
-.card-swipe-right { transform: translateX(120%) rotate(25deg);  opacity: 0; transition: transform 0.3s ease, opacity 0.2s ease; }
-.card-dragging    { transition: none !important; cursor: grabbing; }
-
-.swipe-nope-overlay, .swipe-like-overlay { opacity: 0; transition: opacity 0.15s; }
-.card-drag-left  .swipe-nope-overlay  { opacity: 1; }
-.card-drag-right .swipe-like-overlay  { opacity: 1; }
-
-body.is-dragging { overflow: hidden; touch-action: none; }
 .bottom-nav { padding-bottom: env(safe-area-inset-bottom, 0px); }
 .embed-wrapper iframe { width: 100%; border: none; border-radius: 12px; }
 
