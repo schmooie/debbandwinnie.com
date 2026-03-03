@@ -1,0 +1,185 @@
+[
+  {
+    "id": "andy",
+    "type": "person",
+    "name": "Andy",
+    "age": 28,
+    "distance": "0 miles away",
+    "bio": "Lead guitarist. I write songs about driving at night and forgetting to text back. Currently obsessed with the Microphones and eating cereal for every meal.",
+    "image": "/profiles/andy.jpg",
+    "interests": ["Guitar", "Songwriting", "Late Nights", "Cereal", "Indie Rock", "Cassette Tapes"],
+    "commonInterests": 4,
+    "role": "Band Member — Debb and Winnie"
+  },
+  {
+    "id": "single-debut",
+    "type": "single",
+    "name": "\"Something About That\" — Debb and Winnie",
+    "age": null,
+    "distance": "Available everywhere",
+    "bio": "Our debut single. Recorded in a living room in Eagle Rock. About driving home and not wanting to get out of the car.",
+    "image": null,
+    "embedHtml": "REPLACE_WITH_BANDCAMP_OR_SPOTIFY_EMBED_HTML",
+    "interests": [
+      "Indie Rock",
+      "Lo-Fi",
+      "Guitar",
+      "Eagle Rock"
+    ],
+    "commonInterests": null,
+    "role": "Single"
+  },
+  {
+    "id": "tour-dates",
+    "type": "tourDates",
+    "name": "Debb and Winnie — Live",
+    "age": null,
+    "distance": "Coming to a city near you",
+    "bio": "We tour. We sweat. We eat gas station snacks. Swipe right if you want to see us live.",
+    "image": null,
+    "interests": [
+      "Live Music",
+      "Sweaty Venues",
+      "Gas Station Snacks",
+      "Late Nights"
+    ],
+    "commonInterests": null,
+    "role": "Tour Dates",
+    "dates": [
+      {
+        "date": "Apr 11, 2025",
+        "venue": "The Echo",
+        "city": "Los Angeles, CA",
+        "ticketUrl": "#"
+      },
+      {
+        "date": "Apr 14, 2025",
+        "venue": "Bottom of the Hill",
+        "city": "San Francisco, CA",
+        "ticketUrl": "#"
+      },
+      {
+        "date": "Apr 17, 2025",
+        "venue": "Doug Fir Lounge",
+        "city": "Portland, OR",
+        "ticketUrl": "#"
+      },
+      {
+        "date": "Apr 19, 2025",
+        "venue": "Neumos",
+        "city": "Seattle, WA",
+        "ticketUrl": "#"
+      },
+      {
+        "date": "Apr 23, 2025",
+        "venue": "Kilby Court",
+        "city": "Salt Lake City, UT",
+        "ticketUrl": "#"
+      },
+      {
+        "date": "Apr 26, 2025",
+        "venue": "Larimer Lounge",
+        "city": "Denver, CO",
+        "ticketUrl": "#"
+      }
+    ]
+  },
+  {
+    "id": "sam",
+    "type": "person",
+    "name": "Sam",
+    "age": 27,
+    "distance": "0 miles away",
+    "bio": "Bass player and reluctant adult. I believe in long drives, longer reverb tails, and the healing power of a good bassline. Will recommend you a record you've never heard of.",
+    "image": "/profiles/sam.jpg",
+    "interests": ["Bass Guitar", "Vinyl Records", "Lo-Fi", "Road Trips", "Coffee", "Reverb"],
+    "commonInterests": 3,
+    "role": "Band Member — Debb and Winnie"
+  },
+  {
+    "id": "seth",
+    "type": "person",
+    "name": "Seth",
+    "age": 29,
+    "distance": "0 miles away",
+    "bio": "Drums and percussion. I was the kid who tapped on every surface. Still am. I like the part of shows where no one is talking. Don't bring me to a brunch place with a wait.",
+    "image": "/profiles/seth.jpg",
+    "interests": ["Drums", "Percussion", "Live Shows", "Studio Time", "Tacos", "Ambient Music"],
+    "commonInterests": 2,
+    "role": "Band Member — Debb and Winnie"
+  },
+  {
+    "id": "phoebe-bridgers",
+    "type": "person",
+    "name": "Phoebe Bridgers",
+    "age": 30,
+    "distance": "2 miles away",
+    "bio": "I'll write a song about this date. It'll come out in 3 years. You'll know it's about you because I'll describe the exact sweater you're wearing right now.",
+    "image": "/profiles/phoebe-bridgers.jpg",
+    "interests": ["Folk", "Sad Songs", "Skeletons", "Elliott Smith", "Crying in the Car", "Boygenius"],
+    "commonInterests": 5,
+    "role": "Musician"
+  },
+  {
+    "id": "mac-demarco",
+    "type": "person",
+    "name": "Mac DeMarco",
+    "age": 34,
+    "distance": "Far away, probably on a boat",
+    "bio": "Just a salami boy looking for someone to jam with in the garage. I will absolutely play guitar at your dinner party. Yes I do own more than one denim jacket.",
+    "image": "/profiles/mac-demarco.jpg",
+    "interests": ["Jangle Pop", "Cigarettes (Quit)", "Slacker Rock", "Fishing", "Denim", "Salami"],
+    "commonInterests": 3,
+    "role": "Musician"
+  },
+  {
+    "id": "mitski",
+    "type": "person",
+    "name": "Mitski",
+    "age": 34,
+    "distance": "1 mile away",
+    "bio": "I contain multitudes and also a lot of feelings about being perceived. Let's get dinner but please don't describe me to anyone afterward.",
+    "image": "/profiles/mitski.jpg",
+    "interests": ["Indie Rock", "Theatre", "Solitude", "Piano", "Japanese Food", "Existentialism"],
+    "commonInterests": 4,
+    "role": "Musician"
+  },
+  {
+    "id": "kurt-vile",
+    "type": "person",
+    "name": "Kurt Vile",
+    "age": 44,
+    "distance": "Philly",
+    "bio": "Wakin on a pretty daze. Got a lotta guitar picks if u need one. My schedule is pretty open except when it's not. Let's hang sometime, no rush.",
+    "image": "/profiles/kurt-vile.jpg",
+    "interests": ["Psychedelic Rock", "Long Guitar Solos", "Philadelphia", "Chill Vibes", "Tombs", "Joanna Newsom"],
+    "commonInterests": 2,
+    "role": "Musician"
+  },
+  {
+    "id": "ep-side-a",
+    "type": "single",
+    "name": "Side A EP — Debb and Winnie",
+    "age": null,
+    "distance": "Streaming now",
+    "bio": "Four songs recorded over one weekend. We were eating cereal the whole time. This is what it sounds like.",
+    "image": null,
+    "embedHtml": "REPLACE_WITH_BANDCAMP_OR_SPOTIFY_EMBED_HTML",
+    "interests": ["Indie Rock", "DIY", "Weekend Sessions", "Cereal", "Four Songs"],
+    "commonInterests": null,
+    "role": "EP"
+  },
+  {
+    "id": "single-b-side",
+    "type": "single",
+    "name": "\"Late\" (B-Side) — Debb and Winnie",
+    "age": null,
+    "distance": "Bandcamp exclusive",
+    "bio": "A b-side about being late to everything. Ironically, this one came out on time.",
+    "image": null,
+    "embedHtml": "REPLACE_WITH_BANDCAMP_OR_SPOTIFY_EMBED_HTML",
+    "interests": ["B-Side", "Lo-Fi", "Guitar", "Being Late"],
+    "commonInterests": null,
+    "role": "B-Side"
+  }
+]

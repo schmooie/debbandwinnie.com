@@ -1,0 +1,244 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-purple: #6d28d9;
+  --color-brand-pink:   #ec4899;
+  --color-brand-dark:   #0f0a1e;
+  --color-card-bg:      #1a1033;
+}
+
+/* Swipe animation classes toggled by JS */
+.card-swipe-left  { transform: translateX(-120%) rotate(-25deg); opacity: 0; transition: transform 0.3s ease, opacity 0.2s ease; }
+.card-swipe-right { transform: translateX(120%) rotate(25deg);  opacity: 0; transition: transform 0.3s ease, opacity 0.2s ease; }
+.card-dragging    { transition: none !important; cursor: grabbing; }
+
+.swipe-nope-overlay, .swipe-like-overlay { opacity: 0; transition: opacity 0.15s; }
+.card-drag-left  .swipe-nope-overlay  { opacity: 1; }
+.card-drag-right .swipe-like-overlay  { opacity: 1; }
+
+body.is-dragging { overflow: hidden; touch-action: none; }
+.bottom-nav { padding-bottom: env(safe-area-inset-bottom, 0px); }
+.embed-wrapper iframe { width: 100%; border: none; border-radius: 12px; }
+
+/* ============================================================
+   iPhone Frame — mobile is a transparent passthrough,
+   desktop (≥ 1024px) renders the full iPhone 13 chrome.
+   All dimensions are the CodePen original scaled ×1.698.
+   ============================================================ */
+
+/* --- Mobile defaults: invisible passthrough --- */
+.iphone-wrapper {
+  width: 100%;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.iphone-outer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.iphone-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hide all chrome on mobile */
+.iphone-silencer,
+.iphone-vol-up,
+.iphone-vol-down,
+.iphone-power,
+.iphone-notch,
+.iphone-home-bar { display: none; }
+
+.iphone-content {
+  flex: 1;
+  height: 0;        /* combined with flex:1 makes h-full children resolve correctly */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* --- Desktop: full iPhone 13 Pro Max chrome --- */
+@media (min-width: 768px) {
+
+  /* Desktop wallpaper behind the phone */
+  .iphone-wrapper {
+    width: 100%;
+    height: auto;
+    min-height: 100dvh;
+    max-width: none;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background:
+      radial-gradient(ellipse 110% 55% at 50% -5%, rgba(109, 40, 217, 0.5) 0%, transparent 65%),
+      radial-gradient(ellipse 60% 45% at 92% 105%, rgba(236, 72, 153, 0.2) 0%, transparent 60%),
+      #050210;
+  }
+
+  /* ── Outer body (outside-border) ────────────────────────── */
+  .iphone-outer {
+    /* original: 212 × 438 px, scaled ×1.698 → 360 × 744 px */
+    position: relative;
+    flex: none;
+    width: 360px;
+    height: 744px;
+    border-radius: 60px;               /* original 35 × 1.698 ≈ 59 → 60 */
+    border: 0.6px solid rgba(255, 255, 255, 0.22);
+    background: linear-gradient(160deg, #2c2c2c 0%, #181818 50%, #222222 100%);
+    /* CodePen's layered drop-shadow */
+    box-shadow:
+      0 2.8px  2.2px rgba(0, 0, 0, 0.034),
+      0 6.7px  5.3px rgba(0, 0, 0, 0.048),
+      0 12.5px 10px  rgba(0, 0, 0, 0.060),
+      0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+      0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+      0 100px  80px   rgba(0, 0, 0, 0.22),
+      0 0 70px rgba(109, 40, 217, 0.18);   /* brand ambient */
+  }
+
+  /* ── Side buttons ────────────────────────────────────────── */
+
+  /* Mute/silent toggle — left, top */
+  .iphone-silencer {
+    display: block;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.75);
+    border-radius: 5px;
+    width: 3px;
+    height: 22px;   /* original 13 × 1.698 ≈ 22 */
+    left: -3px;
+    top: 138px;     /* original 81.5 × 1.698 ≈ 138 */
+  }
+
+  /* Volume up — left */
+  .iphone-vol-up {
+    display: block;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.75);
+    border-radius: 5px;
+    width: 2px;
+    height: 48px;   /* original 28 × 1.698 ≈ 48 */
+    left: -2px;
+    top: 187px;     /* original 110 × 1.698 ≈ 187 */
+  }
+
+  /* Volume down — left */
+  .iphone-vol-down {
+    display: block;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.75);
+    border-radius: 5px;
+    width: 2px;
+    height: 48px;
+    left: -2px;
+    top: 251px;     /* original 148 × 1.698 ≈ 251 */
+  }
+
+  /* Power/sleep — right */
+  .iphone-power {
+    display: block;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.75);
+    border-radius: 5px;
+    width: 3px;
+    height: 76px;   /* original 45 × 1.698 ≈ 76 */
+    right: -3px;
+    top: 205px;     /* original 121 × 1.698 ≈ 205 */
+  }
+
+  /* ── Inner bezel (inside-border) ────────────────────────── */
+  .iphone-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border: 10px solid #000;     /* original 6 × 1.698 ≈ 10 */
+    border-radius: 60px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── Notch (camera) ─────────────────────────────────────── */
+  .iphone-notch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    /* original: 76 × 20 px, scaled → 129 × 34 px */
+    width: 129px;
+    height: 34px;
+    background-color: #000;
+    border-bottom-left-radius: 25px;   /* original 15 × 1.698 ≈ 25 */
+    border-bottom-right-radius: 25px;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+    pointer-events: none;
+  }
+
+  /* Front camera dot */
+  .iphone-notch-cam {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.18);
+    border-radius: 50%;
+    width: 9px;       /* original 5 × 1.698 ≈ 8.5 → 9 */
+    height: 9px;
+  }
+
+  .iphone-notch-cam-dot {
+    position: absolute;
+    background-color: #000;
+    border-radius: 50%;
+    width: 2px;
+    height: 2px;
+    opacity: 0.7;
+  }
+
+  /* Earpiece speaker grill */
+  .iphone-notch-speaker {
+    background-color: rgba(255, 255, 255, 0.22);
+    width: 48px;      /* original 28 × 1.698 ≈ 47.5 → 48 */
+    height: 2px;
+    border-radius: 20px;
+  }
+
+  /* ── App content area ───────────────────────────────────── */
+  .iphone-content {
+    flex: 1;
+    height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ── Home indicator bar ─────────────────────────────────── */
+  .iphone-home-bar {
+    display: block;
+    position: absolute;
+    height: 4px;       /* original 2 × 1.698 ≈ 3.4 → 4 */
+    width: 136px;      /* original 80 × 1.698 ≈ 136 */
+    background-color: rgba(255, 255, 255, 0.55);
+    bottom: 10px;      /* original 6 × 1.698 ≈ 10 */
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 4px;
+    z-index: 50;
+    pointer-events: none;
+  }
+}

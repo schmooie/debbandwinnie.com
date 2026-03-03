@@ -1,0 +1,62 @@
+[
+  {
+    "id": "convo-andy",
+    "profileId": "andy",
+    "name": "Andy",
+    "image": "/profiles/andy.jpg",
+    "lastMessage": "ok but which cereal though",
+    "lastTime": "now",
+    "unread": true,
+    "messages": [
+      { "from": "them", "text": "Hey! Matched 🎸", "time": "2:41 PM" },
+      { "from": "me", "text": "I saw you guys play at The Echo last month", "time": "2:43 PM" },
+      { "from": "them", "text": "ok but which cereal though", "time": "3:01 PM" }
+    ]
+  },
+  {
+    "id": "convo-phoebe",
+    "profileId": "phoebe-bridgers",
+    "name": "Phoebe Bridgers",
+    "image": "/profiles/phoebe-bridgers.jpg",
+    "lastMessage": "I'm gonna write a song about this",
+    "lastTime": "2h",
+    "unread": false,
+    "messages": [
+      { "from": "them", "text": "Hi. I matched with you while listening to Motion Picture Soundtrack", "time": "11:00 AM" },
+      { "from": "me", "text": "Is that an omen", "time": "11:02 AM" },
+      { "from": "them", "text": "Everything is an omen", "time": "11:03 AM" },
+      { "from": "me", "text": "Fair enough. Want to get coffee sometime?", "time": "11:05 AM" },
+      { "from": "them", "text": "I'm gonna write a song about this", "time": "11:06 AM" }
+    ]
+  },
+  {
+    "id": "convo-mac",
+    "profileId": "mac-demarco",
+    "name": "Mac DeMarco",
+    "image": "/profiles/mac-demarco.jpg",
+    "lastMessage": "haha yeah man totally",
+    "lastTime": "yesterday",
+    "unread": false,
+    "messages": [
+      { "from": "them", "text": "hey whats up", "time": "4:20 PM" },
+      { "from": "me", "text": "Not much, loved your last record", "time": "4:35 PM" },
+      { "from": "them", "text": "oh dude thanks man that means a lot haha", "time": "4:38 PM" },
+      { "from": "me", "text": "We should play a show together sometime", "time": "4:40 PM" },
+      { "from": "them", "text": "haha yeah man totally", "time": "4:41 PM" }
+    ]
+  },
+  {
+    "id": "convo-mitski",
+    "profileId": "mitski",
+    "name": "Mitski",
+    "image": "/profiles/mitski.jpg",
+    "lastMessage": "That's kind of the point",
+    "lastTime": "3d",
+    "unread": true,
+    "messages": [
+      { "from": "them", "text": "Your music makes me feel something I can't name", "time": "9:00 PM" },
+      { "from": "me", "text": "That's the nicest thing anyone's said to me about it", "time": "9:15 PM" },
+      { "from": "them", "text": "That's kind of the point", "time": "9:16 PM" }
+    ]
+  }
+]
