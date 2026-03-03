@@ -133,12 +133,25 @@ export default function ProfileCard({ profile, index, onSwipe, onInfoClick, behi
             <p className="text-white/40 text-xs mt-0.5">{profile.distance}</p>
           </div>
           <p className="text-white/60 text-sm text-center leading-snug">{profile.bio}</p>
-          <div className="w-full bg-brand-dark rounded-xl p-3 text-center text-white/40 text-sm border border-white/10">
+          <div className="w-full">
             {profile.embedHtml.startsWith('REPLACE') ? (
-              <span>[ Add embed HTML in profiles.json ]</span>
-            ) : (
-              <div dangerouslySetInnerHTML={{ __html: profile.embedHtml }} className="embed-wrapper" />
-            )}
+              <div className="bg-brand-dark rounded-xl p-3 text-center text-white/40 text-sm border border-white/10">
+                [ Add embed HTML in profiles.json ]
+              </div>
+            ) : (() => {
+              const src = profile.embedHtml.match(/src="([^"]+)"/)?.[1]
+              return src ? (
+                <iframe
+                  src={src}
+                  width="100%"
+                  height="80"
+                  frameBorder={0}
+                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                  loading="lazy"
+                  style={{ borderRadius: 12 }}
+                />
+              ) : null
+            })()}
           </div>
           <div className="flex flex-wrap gap-2 justify-center">
             {profile.interests.map(tag => <InterestTag key={tag} label={tag} />)}
