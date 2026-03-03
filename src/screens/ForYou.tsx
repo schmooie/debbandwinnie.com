@@ -25,7 +25,7 @@ export default function ForYou() {
     if (!topCard || swiping) return
     setSwiping(true)
     animate(topCardX, direction === 'left' ? -600 : 600, {
-      type: 'spring', stiffness: 400, damping: 40,
+      type: 'tween', duration: 0.45, ease: [0.32, 0, 0.67, 0],
     }).then(() => {
       topCardX.set(0)
       swipeCard(direction, topCard)
