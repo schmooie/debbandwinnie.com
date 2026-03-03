@@ -63,21 +63,23 @@ export default function ProfileCard({ profile, index, onSwipe, onInfoClick, drag
       dragMomentum={false}
       onDragEnd={index === 0 ? handleDragEnd : undefined}
     >
-      {/* NOPE overlay */}
-      <motion.div
-        className="absolute inset-0 z-40 flex items-start justify-end p-6 pointer-events-none"
-        style={{ opacity: nopeOpacity }}
-      >
-        <span className="border-4 border-red-400 text-red-400 text-3xl font-black rounded-lg px-3 py-1 rotate-12">NOPE</span>
-      </motion.div>
-
-      {/* LIKE overlay */}
-      <motion.div
-        className="absolute inset-0 z-40 flex items-start justify-start p-6 pointer-events-none"
-        style={{ opacity: likeOpacity }}
-      >
-        <span className="border-4 border-green-400 text-green-400 text-3xl font-black rounded-lg px-3 py-1 -rotate-12">LIKE</span>
-      </motion.div>
+      {/* NOPE / LIKE overlays — top card only */}
+      {index === 0 && (
+        <>
+          <motion.div
+            className="absolute inset-0 z-40 flex items-start justify-end p-6 pointer-events-none"
+            style={{ opacity: nopeOpacity }}
+          >
+            <span className="border-4 border-red-400 text-red-400 text-3xl font-black rounded-lg px-3 py-1 rotate-12">NOPE</span>
+          </motion.div>
+          <motion.div
+            className="absolute inset-0 z-40 flex items-start justify-start p-6 pointer-events-none"
+            style={{ opacity: likeOpacity }}
+          >
+            <span className="border-4 border-green-400 text-green-400 text-3xl font-black rounded-lg px-3 py-1 -rotate-12">LIKE</span>
+          </motion.div>
+        </>
+      )}
 
       {/* ── Card content ─────────────────────────────────────── */}
       {profile.type === 'tourDates' ? (
