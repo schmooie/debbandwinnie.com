@@ -24,11 +24,24 @@ export default function ForYou() {
   function handleButtonSwipe(direction: 'left' | 'right') {
     if (!topCard || swiping) return
     setSwiping(direction)
-    const el = cardRef0.current
-    if (el) {
-      el.classList.add(direction === 'left' ? 'card-swipe-left' : 'card-swipe-right')
-    }
+    cardRef0.current?.classList.add(direction === 'left' ? 'card-swipe-left' : 'card-swipe-right')
+
+    // Animate behind cards to their promoted positions simultaneously with the top card
+    const promotedTransforms = ['scale(1) translateY(0px)', 'scale(0.96) translateY(0.75rem)']
+    const behindCards = [cardRef1.current, cardRef2.current]
+    behindCards.forEach((card, i) => {
+      if (!card) return
+      card.style.transition = 'transform 0.3s ease'
+      card.style.transform = promotedTransforms[i]
+    })
+
     setTimeout(() => {
+      // Clear inline styles so Tailwind classes (new indices) take over cleanly
+      behindCards.forEach((card) => {
+        if (!card) return
+        card.style.transition = ''
+        card.style.transform = ''
+      })
       swipeCard(direction, topCard)
       setSwiping(null)
     }, 300)

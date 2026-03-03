@@ -63,6 +63,20 @@ export function attachSwipeGesture(
     if (Math.abs(dx) > 80 || velocity > 0.3) {
       const direction = dx > 0 ? 'right' : 'left'
       el.classList.add(direction === 'left' ? 'card-swipe-left' : 'card-swipe-right')
+
+      // Animate behind cards to their promoted positions simultaneously
+      const promotedTransforms = ['scale(1) translateY(0px)', 'scale(0.96) translateY(0.75rem)']
+      if (options.behindCards) {
+        options.behindCards.forEach((card, i) => {
+          card.style.transition = 'transform 0.3s ease'
+          card.style.transform = promotedTransforms[i] ?? ''
+          setTimeout(() => {
+            card.style.transition = ''
+            card.style.transform = ''
+          }, 300)
+        })
+      }
+
       setTimeout(() => {
         options.onSwipe(direction)
       }, 300)
@@ -73,17 +87,17 @@ export function attachSwipeGesture(
       setTimeout(() => {
         el.style.transition = ''
       }, 300)
-    }
 
-    // Reset behind cards
-    if (options.behindCards) {
-      options.behindCards.forEach((card, i) => {
-        card.style.transition = 'transform 0.3s ease'
-        card.style.transform = ''
-        setTimeout(() => {
-          card.style.transition = ''
-        }, 300)
-      })
+      // Reset behind cards to their original positions
+      if (options.behindCards) {
+        options.behindCards.forEach((card) => {
+          card.style.transition = 'transform 0.3s ease'
+          card.style.transform = ''
+          setTimeout(() => {
+            card.style.transition = ''
+          }, 300)
+        })
+      }
     }
   }
 
