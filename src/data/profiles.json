@@ -175,18 +175,5 @@
     "interests": ["Indie Rock", "DIY", "Weekend Sessions", "Cereal", "Four Songs"],
     "commonInterests": null,
     "role": "EP"
-  },
-  {
-    "id": "single-b-side",
-    "type": "single",
-    "name": "\"Late\" (B-Side) — Debb and Winnie",
-    "age": null,
-    "distance": "Bandcamp exclusive",
-    "bio": "A b-side about being late to everything. Ironically, this one came out on time.",
-    "image": "/profiles/single-b-side.jpg",
-    "embedHtml": "REPLACE_WITH_BANDCAMP_OR_SPOTIFY_EMBED_HTML",
-    "interests": ["B-Side", "Lo-Fi", "Guitar", "Being Late"],
-    "commonInterests": null,
-    "role": "B-Side"
   }
 ]

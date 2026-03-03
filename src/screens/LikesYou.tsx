@@ -2,6 +2,13 @@ import { useNavigate } from 'react-router-dom'
 import { useApp } from '../AppContext.tsx'
 import { generateAvatar } from '../utils/placeholder.ts'
 
+const musicNoteSvg = 'data:image/svg+xml;utf8,' + encodeURIComponent(
+  `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+  <rect width="400" height="400" fill="#1a1033"/>
+  <text x="200" y="200" text-anchor="middle" dominant-baseline="central" font-family="system-ui,sans-serif" font-size="180" fill="#6d28d9">&#9835;</text>
+</svg>`
+)
+
 export default function LikesYou() {
   const { profiles } = useApp()
   const navigate = useNavigate()
@@ -20,7 +27,7 @@ export default function LikesYou() {
                 src={profile.image}
                 alt={profile.name}
                 className="w-full h-full object-cover"
-                onError={e => { e.currentTarget.src = generateAvatar(profile.name) }}
+                onError={e => { e.currentTarget.src = profile.type === 'single' ? musicNoteSvg : generateAvatar(profile.name) }}
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center text-4xl">
