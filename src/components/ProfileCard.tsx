@@ -111,8 +111,8 @@ export default function ProfileCard({ profile, index, onSwipe, onInfoClick, behi
           </div>
         </div>
       ) : profile.type === 'single' ? (
-        <div className="w-full h-full flex flex-col items-center justify-center bg-card-bg p-6 gap-4">
-          {/* Info button — top-right for singles */}
+        <div className="w-full h-full flex flex-col bg-card-bg overflow-hidden">
+          {/* Info button */}
           {index === 0 && (
             <button
               onClick={e => { e.stopPropagation(); onInfoClick() }}
@@ -124,16 +124,19 @@ export default function ProfileCard({ profile, index, onSwipe, onInfoClick, behi
               </svg>
             </button>
           )}
-          <div className="w-20 h-20 rounded-full bg-brand-purple/30 flex items-center justify-center text-4xl">
-            🎵
+
+          {/* Header */}
+          <div className="bg-gradient-to-br from-brand-purple/60 to-brand-pink/30 px-5 pt-10 pb-5 flex flex-col gap-2">
+            <span className="text-5xl">🎵</span>
+            <div>
+              <p className="font-bold text-xl leading-tight line-clamp-2">{profile.name}</p>
+              <p className="text-white/50 text-xs mt-0.5">{profile.role} · {profile.distance}</p>
+            </div>
+            <p className="text-white/70 text-sm leading-snug line-clamp-2">{profile.bio}</p>
           </div>
-          <div className="text-center">
-            <p className="font-bold text-lg">{profile.name}</p>
-            <p className="text-white/50 text-sm mt-1">{profile.role}</p>
-            <p className="text-white/40 text-xs mt-0.5">{profile.distance}</p>
-          </div>
-          <p className="text-white/60 text-sm text-center leading-snug">{profile.bio}</p>
-          <div className="w-full">
+
+          {/* Embed */}
+          <div className="px-4 pt-4">
             {profile.embedHtml.startsWith('REPLACE') ? (
               <div className="bg-brand-dark rounded-xl p-3 text-center text-white/40 text-sm border border-white/10">
                 [ Add embed HTML in profiles.json ]
@@ -153,8 +156,10 @@ export default function ProfileCard({ profile, index, onSwipe, onInfoClick, behi
               ) : null
             })()}
           </div>
-          <div className="flex flex-wrap gap-2 justify-center">
-            {profile.interests.map(tag => <InterestTag key={tag} label={tag} />)}
+
+          {/* Tags */}
+          <div className="flex flex-wrap gap-1.5 px-4 pt-3">
+            {profile.interests.slice(0, 4).map(tag => <InterestTag key={tag} label={tag} />)}
           </div>
         </div>
       ) : (
