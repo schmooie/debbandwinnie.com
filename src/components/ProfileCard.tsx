@@ -128,27 +128,53 @@ export default function ProfileCard({ profile, index, onSwipe, onInfoClick, drag
               aria-label="View profile"
             >{INFO_BTN}</button>
           )}
-          <div className="bg-gradient-to-br from-brand-purple/60 to-brand-pink/30 px-5 pt-10 pb-5 flex flex-col gap-2">
-            <span className="text-5xl">🎵</span>
-            <div>
-              <p className="font-bold text-xl leading-tight line-clamp-2">{profile.name}</p>
-              <p className="text-white/50 text-xs mt-0.5">{profile.role} · {profile.distance}</p>
-            </div>
-            <p className="text-white/70 text-sm leading-snug line-clamp-2">{profile.bio}</p>
-          </div>
-          <div className="px-4 pt-4">
-            {profile.embedHtml.startsWith('REPLACE') ? (
-              <div className="bg-brand-dark rounded-xl p-3 text-center text-white/40 text-sm border border-white/10">
-                [ Add embed HTML in profiles.json ]
+
+          {profile.image ? (
+            /* ── Album-art layout ─────────────────────────── */
+            <>
+              <img
+                src={profile.image}
+                alt={profile.name}
+                className="w-full h-full object-cover absolute inset-0"
+                onError={e => { e.currentTarget.src = generateAvatar(profile.name) }}
+                draggable={false}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none" />
+              <div className="absolute bottom-0 left-0 right-0 px-4 pt-8 pb-3 z-10 flex flex-col gap-2">
+                <div>
+                  <p className="font-bold text-xl leading-tight line-clamp-2">{profile.name}</p>
+                  <p className="text-white/60 text-xs mt-0.5">{profile.role} · {profile.distance}</p>
+                </div>
+                {!profile.embedHtml.startsWith('REPLACE') && (
+                  <PersistentEmbed embedHtml={profile.embedHtml} height={80} />
+                )}
               </div>
-            ) : (
-              <PersistentEmbed embedHtml={profile.embedHtml} height={80} />
-            )}
-          </div>
-          <div className="flex flex-wrap gap-1.5 px-4 pt-3">
-            {profile.interests.slice(0, 4).map(tag => <InterestTag key={tag} label={tag} />)}
-          </div>
-        </div>
+            </>
+          ) : (
+            /* ── No-image layout ──────────────────────────── */
+            <>
+              <div className="bg-gradient-to-br from-brand-purple/60 to-brand-pink/30 px-5 pt-10 pb-5 flex flex-col gap-2">
+                <span className="text-5xl">🎵</span>
+                <div>
+                  <p className="font-bold text-xl leading-tight line-clamp-2">{profile.name}</p>
+                  <p className="text-white/50 text-xs mt-0.5">{profile.role} · {profile.distance}</p>
+                </div>
+                <p className="text-white/70 text-sm leading-snug line-clamp-2">{profile.bio}</p>
+              </div>
+              <div className="px-4 pt-4">
+                {profile.embedHtml.startsWith('REPLACE') ? (
+                  <div className="bg-brand-dark rounded-xl p-3 text-center text-white/40 text-sm border border-white/10">
+                    [ Add embed HTML in profiles.json ]
+                  </div>
+                ) : (
+                  <PersistentEmbed embedHtml={profile.embedHtml} height={80} />
+                )}
+              </div>
+              <div className="flex flex-wrap gap-1.5 px-4 pt-3">
+                {profile.interests.slice(0, 4).map(tag => <InterestTag key={tag} label={tag} />)}
+              </div>
+            </>
+          )}</div>
 
       ) : (
         <>

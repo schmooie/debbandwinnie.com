@@ -27,7 +27,7 @@ export interface SingleProfile {
   age: null
   distance: string
   bio: string
-  image: null
+  image: string | null
   embedHtml: string
   interests: string[]
   commonInterests: null

@@ -2,6 +2,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useApp } from '../AppContext.tsx'
 import { generateAvatar } from '../utils/placeholder.ts'
 import InterestTag from '../components/InterestTag.tsx'
+import PersistentEmbed from '../components/PersistentEmbed.tsx'
 
 export default function ProfileDetail() {
   const { id } = useParams()
@@ -112,26 +113,38 @@ export default function ProfileDetail() {
           </div>
         </div>
       ) : (
-        <div className="w-full bg-card-bg px-4 py-8 flex flex-col items-center gap-4">
-          <div className="w-24 h-24 rounded-full bg-brand-purple/30 flex items-center justify-center text-5xl">
-            🎵
-          </div>
-          <div className="text-center">
-            <h1 className="font-bold text-2xl">{profile.name}</h1>
-            <p className="text-white/50 text-sm mt-1">{profile.role}</p>
-            <p className="text-white/40 text-xs mt-1">{profile.distance}</p>
-          </div>
-          {profile.embedHtml.startsWith('REPLACE') ? (
-            <div className="w-full bg-brand-dark rounded-xl p-6 text-center text-white/30 text-sm border border-white/10">
-              [ Add embed HTML in src/data/profiles.json ]
+        <>
+          {profile.image && (
+            <div className="relative aspect-square w-full shrink-0">
+              <img
+                src={profile.image}
+                alt={profile.name}
+                className="w-full h-full object-cover"
+                onError={e => { e.currentTarget.src = generateAvatar(profile.name) }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             </div>
-          ) : (
-            <div
-              dangerouslySetInnerHTML={{ __html: profile.embedHtml }}
-              className="embed-wrapper w-full"
-            />
           )}
-        </div>
+          <div className={`w-full bg-card-bg px-4 flex flex-col items-center gap-4 ${profile.image ? 'pt-4 pb-6' : 'py-8'}`}>
+            {!profile.image && (
+              <div className="w-24 h-24 rounded-full bg-brand-purple/30 flex items-center justify-center text-5xl">
+                🎵
+              </div>
+            )}
+            <div className="text-center">
+              <h1 className="font-bold text-2xl">{profile.name}</h1>
+              <p className="text-white/50 text-sm mt-1">{profile.role}</p>
+              <p className="text-white/40 text-xs mt-1">{profile.distance}</p>
+            </div>
+            {profile.embedHtml.startsWith('REPLACE') ? (
+              <div className="w-full bg-brand-dark rounded-xl p-6 text-center text-white/30 text-sm border border-white/10">
+                [ Add embed HTML in src/data/profiles.json ]
+              </div>
+            ) : (
+              <PersistentEmbed embedHtml={profile.embedHtml} height={352} />
+            )}
+          </div>
+        </>
       )}
 
       {/* Bio & details */}
