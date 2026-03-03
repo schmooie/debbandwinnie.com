@@ -13,6 +13,7 @@ export function attachSwipeGesture(
   let isDragging = false
 
   function onPointerDown(e: PointerEvent) {
+    if ((e.target as HTMLElement).closest('button, a')) return
     el.setPointerCapture(e.pointerId)
     startX = e.clientX
     startY = e.clientY
