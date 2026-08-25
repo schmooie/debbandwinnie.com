@@ -193,17 +193,19 @@ h2 .num{font-family:var(--mono);font-size:11px;color:var(--toner-soft);letter-sp
 .mark.red path,.mark.red line{stroke:var(--redpen)}
 .scrawl.red{color:var(--redpen)}
 .mark .draw{stroke-dasharray:var(--len,900);stroke-dashoffset:var(--len,900)}
-.inked .draw{animation:ink .72s cubic-bezier(.42,.03,.32,1) forwards}
+/* fill-mode:both + explicit resting state so the drawn line survives even if
+   mobile Safari drops the post-animation forwards fill (would otherwise snap back) */
+.inked .draw{animation:ink .72s cubic-bezier(.42,.03,.32,1) both;stroke-dashoffset:0}
 .inked .d2{animation-delay:.2s}
 .inked .d3{animation-delay:.38s}
-@keyframes ink{to{stroke-dashoffset:0}}
+@keyframes ink{from{stroke-dashoffset:var(--len,900)}to{stroke-dashoffset:0}}
 
 .scrawl{
   position:absolute;font-family:var(--marker);color:var(--sharpie);
   line-height:1.05;z-index:3;pointer-events:none;opacity:0;
 }
-.inked .scrawl{animation:appear .42s ease .44s forwards}
-@keyframes appear{to{opacity:1}}
+.inked .scrawl{animation:appear .42s ease .44s both;opacity:1}
+@keyframes appear{from{opacity:0}to{opacity:1}}
 
 /* placed marks */
 .anchor{position:relative}
@@ -220,7 +222,7 @@ h1 .t-line + .t-line{margin-top:.12em}
 /* band name writes in, letter by letter (per-letter delay set inline) */
 .s-bandname .ch{display:inline-block;opacity:0}
 .inked .s-bandname{animation:none}
-.inked .s-bandname .ch{animation:letterIn .34s cubic-bezier(.3,.7,.25,1) forwards}
+.inked .s-bandname .ch{animation:letterIn .34s cubic-bezier(.3,.7,.25,1) both;opacity:1;transform:none}
 @keyframes letterIn{
   from{opacity:0;transform:translateY(.22em) rotate(-8deg) scale(.84)}
   to{opacity:1;transform:none}
@@ -232,7 +234,7 @@ h1 .t-line + .t-line{margin-top:.12em}
   text-align:center;transform:rotate(-1.2deg);
   margin:clamp(14px,3vw,22px) 0 0;opacity:0;
 }
-.inked .outnow{animation:appear .42s ease .44s forwards}
+.inked .outnow{animation:appear .42s ease .44s both;opacity:1}
 
 /* red proofreader callout on the band name */
 .s-debbnote{
