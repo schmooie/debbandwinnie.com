@@ -1,234 +1,277 @@
-@import "tailwindcss";
-
-@theme {
-  --color-brand-purple: #6d28d9;
-  --color-brand-pink:   #ec4899;
-  --color-brand-dark:   #0f0a1e;
-  --color-card-bg:      #1a1033;
+:root{
+  --surface:#15161a;
+  --paper:#edebe4;
+  --toner:#2f2e2b;
+  --toner-soft:#6b6963;
+  --sharpie:#0b0b0f;
+  --redpen:#cc2f26;
+  --stamp:#8b2b22;
+  --rule:#c9c6bd;
+  --serif:"Times New Roman","Liberation Serif",Times,serif;
+  --mono:"Courier New",Courier,monospace;
+  --marker:"Permanent Marker","Comic Sans MS",cursive;
 }
 
-.bottom-nav { padding-bottom: env(safe-area-inset-bottom, 0px); }
-.embed-wrapper iframe { width: 100%; border: none; border-radius: 12px; }
-
-/* ============================================================
-   iPhone Frame — mobile is a transparent passthrough,
-   desktop (≥ 1024px) renders the full iPhone 13 chrome.
-   All dimensions are the CodePen original scaled ×1.698.
-   ============================================================ */
-
-/* --- Mobile defaults: invisible passthrough --- */
-.iphone-wrapper {
-  width: 100%;
-  height: 100dvh;
-  display: flex;
-  flex-direction: column;
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--surface);
+  background-image:radial-gradient(120% 80% at 50% 0%,#1e2027 0%,#111216 70%);
+  font-family:var(--serif);
+  color:var(--toner);
+  padding:clamp(12px,4vw,56px) clamp(8px,3vw,24px) 80px;
 }
 
-.iphone-outer {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+/* ---------- the sheet ---------- */
+.sheet{
+  position:relative;
+  max-width:720px;
+  margin:0 auto;
+  background:var(--paper);
+  padding:clamp(28px,6vw,64px) clamp(20px,5vw,68px) clamp(48px,7vw,80px);
+  transform:rotate(-.35deg);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.06),
+    0 30px 60px -20px rgba(0,0,0,.8),
+    0 2px 8px rgba(0,0,0,.5),
+    inset 0 0 70px rgba(0,0,0,.055);
+}
+/* photocopy edge shadow down the spine */
+.sheet::before{
+  content:"";position:absolute;inset:0 auto 0 0;width:26px;
+  background:linear-gradient(90deg,rgba(0,0,0,.16),rgba(0,0,0,0));
+  pointer-events:none;
+}
+/* toner grain */
+.sheet::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  mix-blend-mode:multiply;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+}
+.sheet > *{position:relative;z-index:1}
+
+/* ---------- document type ---------- */
+.docmeta{
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+  color:var(--toner-soft);text-transform:uppercase;
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  border-bottom:1px solid var(--rule);padding-bottom:8px;margin-bottom:clamp(40px,9vw,72px);
 }
 
-.iphone-inner {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  overflow: hidden;
+.title-block{text-align:center;margin-bottom:clamp(36px,7vw,56px)}
+h1{
+  font-family:var(--serif);font-weight:700;
+  font-size:clamp(26px,7.2vw,50px);
+  letter-spacing:.14em;margin:0;line-height:1.05;
+  text-transform:uppercase;
+}
+.subtitle{
+  font-family:var(--mono);font-size:clamp(9px,2.2vw,11px);
+  letter-spacing:.2em;text-transform:uppercase;color:var(--toner-soft);
+  margin-top:14px;
 }
 
-/* Hide all chrome on mobile */
-.iphone-silencer,
-.iphone-vol-up,
-.iphone-vol-down,
-.iphone-power,
-.iphone-notch,
-.iphone-home-bar { display: none; }
+p{font-size:clamp(13px,2.6vw,15px);line-height:1.72;margin:0 0 1em;text-align:justify;hyphens:auto}
+.preamble{margin-bottom:clamp(32px,6vw,48px)}
 
-.iphone-content {
-  flex: 1;
-  height: 0;        /* combined with flex:1 makes h-full children resolve correctly */
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+h2{
+  font-family:var(--serif);font-size:clamp(12px,2.4vw,14px);
+  letter-spacing:.2em;text-transform:uppercase;font-weight:700;
+  margin:clamp(34px,6vw,52px) 0 14px;
+  display:flex;gap:12px;align-items:baseline;
+}
+h2 .num{font-family:var(--mono);font-size:11px;color:var(--toner-soft);letter-spacing:0}
+
+.clause{font-size:clamp(13px,2.6vw,15px);line-height:1.72;margin:0 0 .85em;padding-left:44px;text-indent:-44px}
+.clause .ref{font-family:var(--mono);font-size:12px;color:var(--toner-soft);display:inline-block;width:44px;text-indent:0}
+
+/* redaction */
+.redact{
+  background:#131316;color:transparent;user-select:none;
+  padding:0 .18em;box-decoration-break:clone;-webkit-box-decoration-break:clone;
+  border-radius:1px;
 }
 
-/* --- Desktop: full iPhone 13 Pro Max chrome --- */
-@media (min-width: 768px) {
+/* ---------- listening links ---------- */
+.platforms{list-style:none;margin:22px 0 8px;padding:0 0 0 44px}
+.platforms li{border-top:1px solid var(--rule)}
+.platforms li:last-child{border-bottom:1px solid var(--rule)}
+.platforms a{
+  display:flex;align-items:baseline;gap:14px;
+  padding:11px 2px;text-decoration:none;color:var(--toner);
+  font-size:clamp(14px,3vw,17px);letter-spacing:.02em;
+}
+.platforms .idx{font-family:var(--mono);font-size:11px;color:var(--toner-soft);width:36px;flex:none}
+.platforms .name{flex:1;text-transform:uppercase;letter-spacing:.1em;font-size:clamp(12px,2.6vw,14px)}
+.platforms .go{font-family:var(--mono);font-size:11px;color:var(--toner-soft);letter-spacing:.1em}
+.platforms a:hover .go,.platforms a:focus-visible .go{color:var(--sharpie)}
+.platforms a:hover .name,.platforms a:focus-visible .name{text-decoration:underline;text-underline-offset:4px}
 
-  /* Desktop wallpaper behind the phone */
-  .iphone-wrapper {
-    width: 100%;
-    height: auto;
-    min-height: 100dvh;
-    max-width: none;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    background:
-      radial-gradient(ellipse 110% 55% at 50% -5%, rgba(109, 40, 217, 0.5) 0%, transparent 65%),
-      radial-gradient(ellipse 60% 45% at 92% 105%, rgba(236, 72, 153, 0.2) 0%, transparent 60%),
-      #050210;
-  }
+.pending-set{position:relative}
+.platforms li.pending{display:flex;align-items:baseline;gap:14px;padding:11px 2px;color:var(--toner-soft)}
+.platforms li.pending .name{font-size:clamp(12px,2.6vw,14px)}
+.platforms li.pending .go{font-style:italic}
 
-  /* ── Outer body (outside-border) ────────────────────────── */
-  .iphone-outer {
-    /* original: 212 × 438 px, scaled ×1.698 → 360 × 744 px */
-    position: relative;
-    flex: none;
-    width: 360px;
-    height: 744px;
-    border-radius: 60px;               /* original 35 × 1.698 ≈ 59 → 60 */
-    border: 0.6px solid rgba(255, 255, 255, 0.22);
-    background: linear-gradient(160deg, #2c2c2c 0%, #181818 50%, #222222 100%);
-    /* CodePen's layered drop-shadow */
-    box-shadow:
-      0 2.8px  2.2px rgba(0, 0, 0, 0.034),
-      0 6.7px  5.3px rgba(0, 0, 0, 0.048),
-      0 12.5px 10px  rgba(0, 0, 0, 0.060),
-      0 22.3px 17.9px rgba(0, 0, 0, 0.072),
-      0 41.8px 33.4px rgba(0, 0, 0, 0.086),
-      0 100px  80px   rgba(0, 0, 0, 0.22),
-      0 0 70px rgba(109, 40, 217, 0.18);   /* brand ambient */
-  }
+/* ---------- schedule: single date ---------- */
+.datecard{
+  display:flex;gap:clamp(18px,5vw,34px);align-items:center;
+  margin:24px 0 8px;padding:clamp(18px,4vw,26px) 0;
+  border-top:1px solid var(--toner);border-bottom:1px solid var(--toner);
+}
+.dc-when{display:flex;flex-direction:column;align-items:center;flex:none;line-height:1}
+.dc-day{font-size:clamp(42px,12vw,68px);font-weight:700;letter-spacing:-.02em}
+.dc-mon{font-family:var(--mono);font-size:clamp(11px,2.6vw,13px);letter-spacing:.24em;text-transform:uppercase;margin-top:7px}
+.dc-yr{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;color:var(--toner-soft);margin-top:5px}
+.dc-where{display:flex;flex-direction:column;gap:7px;min-width:0}
+.dc-venue{font-size:clamp(19px,5vw,30px);line-height:1.1;letter-spacing:.01em}
+.dc-city{font-family:var(--mono);font-size:clamp(9.5px,2.2vw,11px);letter-spacing:.18em;text-transform:uppercase;color:var(--toner-soft)}
 
-  /* ── Side buttons ────────────────────────────────────────── */
+/* ---------- exhibit ---------- */
+.exhibit{
+  margin:26px 0 8px;border:1px solid var(--toner);
+  aspect-ratio:5/3;display:flex;align-items:center;justify-content:center;
+  background:
+    repeating-linear-gradient(45deg,rgba(0,0,0,.022) 0 10px,transparent 10px 20px);
+}
+.exhibit span{
+  font-family:var(--mono);font-size:clamp(9px,2.2vw,11px);letter-spacing:.2em;
+  text-transform:uppercase;color:var(--toner-soft);text-align:center;padding:0 20px;
+}
 
-  /* Mute/silent toggle — left, top */
-  .iphone-silencer {
-    display: block;
-    position: absolute;
-    background-color: rgba(255, 255, 255, 0.75);
-    border-radius: 5px;
-    width: 3px;
-    height: 22px;   /* original 13 × 1.698 ≈ 22 */
-    left: -3px;
-    top: 138px;     /* original 81.5 × 1.698 ≈ 138 */
-  }
+/* ---------- notices ---------- */
+.notices{margin:20px 0 8px;padding-left:44px}
+.notices div{display:flex;gap:14px;padding:9px 0;border-bottom:1px solid var(--rule);flex-wrap:wrap;font-size:clamp(13px,2.6vw,15px)}
+.notices dt{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--toner-soft);width:100px;flex:none;padding-top:3px}
+.notices a{color:var(--toner);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
 
-  /* Volume up — left */
-  .iphone-vol-up {
-    display: block;
-    position: absolute;
-    background-color: rgba(255, 255, 255, 0.75);
-    border-radius: 5px;
-    width: 2px;
-    height: 48px;   /* original 28 × 1.698 ≈ 48 */
-    left: -2px;
-    top: 187px;     /* original 110 × 1.698 ≈ 187 */
-  }
+/* ---------- acceptance ---------- */
+.accept{margin-top:26px;border:1px solid var(--toner);padding:clamp(18px,4vw,26px)}
+.accept-row{display:flex;gap:12px;align-items:flex-start;cursor:pointer;font-size:clamp(13px,2.6vw,15px);line-height:1.55}
+.accept-row input{
+  appearance:none;-webkit-appearance:none;margin:2px 0 0;flex:none;
+  width:17px;height:17px;border:1.5px solid var(--toner);background:transparent;cursor:pointer;
+}
+.accept-row input:checked{background:var(--sharpie);border-color:var(--sharpie)}
+.accept-row input:focus-visible{outline:2px solid var(--sharpie);outline-offset:3px}
+.accept-fields{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.accept-fields input[type=email]{
+  flex:1 1 190px;min-width:0;background:transparent;border:0;border-bottom:1px solid var(--toner);
+  font-family:var(--mono);font-size:13px;padding:8px 2px;color:var(--toner);border-radius:0;
+}
+.accept-fields input[type=email]::placeholder{color:var(--toner-soft)}
+.accept-fields button{
+  font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  background:var(--toner);color:var(--paper);border:0;padding:11px 22px;cursor:pointer;
+}
+.accept-fields button:disabled{opacity:.35;cursor:not-allowed}
+.accept-fields button:not(:disabled):hover{background:var(--sharpie)}
+.accept-note{font-family:var(--mono);font-size:10px;line-height:1.7;letter-spacing:.05em;color:var(--toner-soft);margin:16px 0 0;text-align:left}
 
-  /* Volume down — left */
-  .iphone-vol-down {
-    display: block;
-    position: absolute;
-    background-color: rgba(255, 255, 255, 0.75);
-    border-radius: 5px;
-    width: 2px;
-    height: 48px;
-    left: -2px;
-    top: 251px;     /* original 148 × 1.698 ≈ 251 */
-  }
+/* stamp */
+.stamp{
+  position:absolute;right:clamp(8px,4vw,40px);bottom:clamp(40px,7vw,72px);
+  border:2.5px solid var(--stamp);color:var(--stamp);
+  font-family:var(--mono);font-weight:700;font-size:clamp(11px,2.4vw,14px);
+  letter-spacing:.22em;padding:9px 16px;transform:rotate(-11deg);
+  opacity:.62;mix-blend-mode:multiply;pointer-events:none;
+}
 
-  /* Power/sleep — right */
-  .iphone-power {
-    display: block;
-    position: absolute;
-    background-color: rgba(255, 255, 255, 0.75);
-    border-radius: 5px;
-    width: 3px;
-    height: 76px;   /* original 45 × 1.698 ≈ 76 */
-    right: -3px;
-    top: 205px;     /* original 121 × 1.698 ≈ 205 */
-  }
+.fineprint{
+  margin-top:clamp(44px,8vw,68px);padding-top:14px;border-top:1px solid var(--rule);
+  font-family:var(--mono);font-size:9.5px;line-height:1.85;letter-spacing:.05em;color:var(--toner-soft);
+  text-align:justify;
+}
 
-  /* ── Inner bezel (inside-border) ────────────────────────── */
-  .iphone-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    border: 10px solid #000;     /* original 6 × 1.698 ≈ 10 */
-    border-radius: 60px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-  }
+/* ---------- sharpie layer ---------- */
+.mark{position:absolute;pointer-events:none;z-index:3;overflow:visible}
+.mark path,.mark line{
+  fill:none;stroke:var(--sharpie);stroke-linecap:round;stroke-linejoin:round;
+  filter:url(#rough);
+}
+/* red proofreader's pen */
+.mark.red path,.mark.red line{stroke:var(--redpen)}
+.scrawl.red{color:var(--redpen)}
+.mark .draw{stroke-dasharray:var(--len,900);stroke-dashoffset:var(--len,900)}
+.inked .draw{animation:ink .58s cubic-bezier(.55,.1,.35,1) forwards}
+.inked .d2{animation-delay:.16s}
+.inked .d3{animation-delay:.3s}
+@keyframes ink{to{stroke-dashoffset:0}}
 
-  /* ── Notch (camera) ─────────────────────────────────────── */
-  .iphone-notch {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    position: absolute;
-    /* original: 76 × 20 px, scaled → 129 × 34 px */
-    width: 129px;
-    height: 34px;
-    background-color: #000;
-    border-bottom-left-radius: 25px;   /* original 15 × 1.698 ≈ 25 */
-    border-bottom-right-radius: 25px;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 50;
-    pointer-events: none;
-  }
+.scrawl{
+  position:absolute;font-family:var(--marker);color:var(--sharpie);
+  line-height:1.05;z-index:3;pointer-events:none;opacity:0;
+}
+.inked .scrawl{animation:appear .3s ease .34s forwards}
+@keyframes appear{to{opacity:1}}
 
-  /* Front camera dot */
-  .iphone-notch-cam {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(255, 255, 255, 0.18);
-    border-radius: 50%;
-    width: 9px;       /* original 5 × 1.698 ≈ 8.5 → 9 */
-    height: 9px;
-  }
+/* placed marks */
+.anchor{position:relative}
 
-  .iphone-notch-cam-dot {
-    position: absolute;
-    background-color: #000;
-    border-radius: 50%;
-    width: 2px;
-    height: 2px;
-    opacity: 0.7;
-  }
+/* two-line title, each line underlined — reflow-proof (underline hugs its line) */
+h1 .t-line{display:block;width:fit-content;margin:0 auto;position:relative;padding-bottom:.04em}
+h1 .t-line + .t-line{margin-top:.12em}
+.m-uline{left:0;top:calc(100% - 7px);width:100%;height:16px}
+.s-bandname{
+  top:clamp(-58px,-9vw,-40px);left:50%;transform:translateX(-50%) rotate(-2.2deg);
+  font-size:clamp(30px,8.5vw,54px);letter-spacing:.01em;white-space:nowrap;
+}
+/* "new single out now" — flows between title and subtitle (reflow-proof) */
+.outnow{
+  font-family:var(--marker);color:var(--sharpie);
+  font-size:clamp(15px,3.6vw,19px);line-height:1;
+  text-align:center;transform:rotate(-1.2deg);
+  margin:clamp(14px,3vw,22px) 0 0;opacity:0;
+}
+.inked .outnow{animation:appear .3s ease .34s forwards}
 
-  /* Earpiece speaker grill */
-  .iphone-notch-speaker {
-    background-color: rgba(255, 255, 255, 0.22);
-    width: 48px;      /* original 28 × 1.698 ≈ 47.5 → 48 */
-    height: 2px;
-    border-radius: 20px;
-  }
+/* red proofreader callout on the band name */
+.s-debbnote{
+  top:clamp(-128px,-22vw,-108px);left:1%;transform:rotate(-5deg);
+  font-size:clamp(11px,2.6vw,14px);line-height:1.15;text-align:left;
+}
+.m-debbarrow{left:5%;top:-98px;width:150px;height:82px}
 
-  /* ── App content area ───────────────────────────────────── */
-  .iphone-content {
-    flex: 1;
-    height: 0;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
+.m-loud{left:-4px;top:3px;width:132px;height:30px}
+.s-loud{top:-3px;left:238px;transform:rotate(-4deg);font-size:16px;white-space:nowrap}
 
-  /* ── Home indicator bar ─────────────────────────────────── */
-  .iphone-home-bar {
-    display: block;
-    position: absolute;
-    height: 4px;       /* original 2 × 1.698 ≈ 3.4 → 4 */
-    width: 136px;      /* original 80 × 1.698 ≈ 136 */
-    background-color: rgba(255, 255, 255, 0.55);
-    bottom: 10px;      /* original 6 × 1.698 ≈ 10 */
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 4px;
-    z-index: 50;
-    pointer-events: none;
-  }
+.m-bandcamp{left:-10px;top:-9px;width:calc(100% + 22px);height:calc(100% + 18px)}
+.s-bandcamp{
+  top:calc(100% - 2px);left:8px;transform:rotate(-1.5deg);
+  font-size:clamp(12px,3vw,15px);white-space:nowrap;
+}
+
+.m-pending{left:-30px;top:2px;width:26px;height:calc(100% - 4px)}
+.s-pending{
+  top:calc(100% + 6px);right:6px;transform:rotate(-3deg);
+  font-size:clamp(12px,3vw,15px);white-space:nowrap;
+}
+
+.m-date{left:-6px;top:calc(100% - 6px);width:calc(100% + 14px);height:20px}
+
+.s-photos{
+  top:38%;left:50%;transform:translate(-50%,-50%) rotate(-4deg);
+  font-size:clamp(18px,5vw,30px);white-space:nowrap;text-align:center;
+}
+.m-photobox{left:12%;top:60%;width:76%;height:60px}
+
+.m-email{left:-8px;top:-6px;width:calc(100% + 16px);height:calc(100% + 12px)}
+
+@media (max-width:560px){
+  .sheet{transform:none}
+  .clause{padding-left:36px;text-indent:-36px}
+  .clause .ref{width:36px}
+  .platforms,.notices{padding-left:0}
+  .notices dt{width:auto}
+  .datecard{gap:16px}
+  .m-pending{left:-16px;width:18px}
+  .s-pending{display:none}
+  .s-loud,.m-loud{display:none}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .inked .draw{animation:none;stroke-dashoffset:0}
+  .inked .scrawl,.inked .outnow{animation:none;opacity:1}
+  .draw{stroke-dashoffset:0}
+  .scrawl,.outnow{opacity:1}
 }
