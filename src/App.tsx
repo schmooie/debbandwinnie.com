@@ -115,7 +115,24 @@ export default function App() {
           <div className="outnow">new single ↓ out now</div>
           <p className="subtitle">Please read carefully before listening</p>
 
-          <div className="scrawl s-bandname">Debb &amp; Winnie</div>
+          <div className="scrawl s-bandname" aria-label="Debb & Winnie">
+            {Array.from('Debb & Winnie').map((c, i, arr) => {
+              // Accelerating reveal: gaps between letters shrink as we go,
+              // so the name starts slow and speeds up toward the end.
+              const t = arr.length > 1 ? i / (arr.length - 1) : 0
+              const delay = 0.26 + 0.52 * (1 - Math.pow(1 - t, 1.8))
+              return (
+              <span
+                key={i}
+                className="ch"
+                aria-hidden="true"
+                style={{ animationDelay: `${delay.toFixed(3)}s` }}
+              >
+                {c === ' ' ? ' ' : c}
+              </span>
+              )
+            })}
+          </div>
 
           <div className="scrawl red s-debbnote">
             two b’s in “Debb,”

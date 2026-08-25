@@ -142,7 +142,7 @@ h2 .num{font-family:var(--mono);font-size:11px;color:var(--toner-soft);letter-sp
 /* ---------- notices ---------- */
 .notices{margin:20px 0 8px;padding-left:44px}
 .notices div{display:flex;gap:14px;padding:9px 0;border-bottom:1px solid var(--rule);flex-wrap:wrap;font-size:clamp(13px,2.6vw,15px)}
-.notices dt{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--toner-soft);width:100px;flex:none;padding-top:3px}
+.notices dt{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--toner-soft);width:118px;flex:none;padding-top:3px}
 .notices a{color:var(--toner);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
 
 /* ---------- acceptance ---------- */
@@ -193,16 +193,16 @@ h2 .num{font-family:var(--mono);font-size:11px;color:var(--toner-soft);letter-sp
 .mark.red path,.mark.red line{stroke:var(--redpen)}
 .scrawl.red{color:var(--redpen)}
 .mark .draw{stroke-dasharray:var(--len,900);stroke-dashoffset:var(--len,900)}
-.inked .draw{animation:ink .58s cubic-bezier(.55,.1,.35,1) forwards}
-.inked .d2{animation-delay:.16s}
-.inked .d3{animation-delay:.3s}
+.inked .draw{animation:ink .72s cubic-bezier(.42,.03,.32,1) forwards}
+.inked .d2{animation-delay:.2s}
+.inked .d3{animation-delay:.38s}
 @keyframes ink{to{stroke-dashoffset:0}}
 
 .scrawl{
   position:absolute;font-family:var(--marker);color:var(--sharpie);
   line-height:1.05;z-index:3;pointer-events:none;opacity:0;
 }
-.inked .scrawl{animation:appear .3s ease .34s forwards}
+.inked .scrawl{animation:appear .42s ease .44s forwards}
 @keyframes appear{to{opacity:1}}
 
 /* placed marks */
@@ -215,6 +215,15 @@ h1 .t-line + .t-line{margin-top:.12em}
 .s-bandname{
   top:clamp(-58px,-9vw,-40px);left:50%;transform:translateX(-50%) rotate(-2.2deg);
   font-size:clamp(30px,8.5vw,54px);letter-spacing:.01em;white-space:nowrap;
+  opacity:1;  /* letters handle their own reveal */
+}
+/* band name writes in, letter by letter (per-letter delay set inline) */
+.s-bandname .ch{display:inline-block;opacity:0}
+.inked .s-bandname{animation:none}
+.inked .s-bandname .ch{animation:letterIn .34s cubic-bezier(.3,.7,.25,1) forwards}
+@keyframes letterIn{
+  from{opacity:0;transform:translateY(.22em) rotate(-8deg) scale(.84)}
+  to{opacity:1;transform:none}
 }
 /* "new single out now" — flows between title and subtitle (reflow-proof) */
 .outnow{
@@ -223,7 +232,7 @@ h1 .t-line + .t-line{margin-top:.12em}
   text-align:center;transform:rotate(-1.2deg);
   margin:clamp(14px,3vw,22px) 0 0;opacity:0;
 }
-.inked .outnow{animation:appear .3s ease .34s forwards}
+.inked .outnow{animation:appear .42s ease .44s forwards}
 
 /* red proofreader callout on the band name */
 .s-debbnote{
@@ -262,7 +271,6 @@ h1 .t-line + .t-line{margin-top:.12em}
   .clause{padding-left:36px;text-indent:-36px}
   .clause .ref{width:36px}
   .platforms,.notices{padding-left:0}
-  .notices dt{width:auto}
   .datecard{gap:16px}
   .m-pending{left:-16px;width:18px}
   .s-pending{display:none}
@@ -274,4 +282,5 @@ h1 .t-line + .t-line{margin-top:.12em}
   .inked .scrawl,.inked .outnow{animation:none;opacity:1}
   .draw{stroke-dashoffset:0}
   .scrawl,.outnow{opacity:1}
+  .s-bandname .ch{animation:none;opacity:1;transform:none}
 }
