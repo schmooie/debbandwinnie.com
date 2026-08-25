@@ -147,7 +147,8 @@ export default function App() {
         </h2>
         <p className="clause">
           <span className="ref">1.1</span> &ldquo;The Band&rdquo; means Debb and Winnie, a two&#8209;piece operating
-          out of Greenpoint, Brooklyn: one on bass and voice, one on drums.
+          out of Greenpoint, Brooklyn: one on guitar, one on bass. In the event the two switch instruments, the
+          foregoing shall be read in reverse.
         </p>
         <p className="clause">
           <span className="ref">1.2</span> &ldquo;The Recording&rdquo; means the single entitled{' '}
