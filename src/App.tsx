@@ -14,6 +14,13 @@ const ENDPOINT: string | null = null // e.g. 'https://buttondown.com/api/emails/
 // custom-property inline styles (--len drives the sharpie draw length)
 const len = (n: number): CSSProperties => ({ ['--len' as string]: n })
 
+// The paper wears one step per browsing session; after WEAR_MAX steps the copy
+// is wrecked and the §7 "fresh copy" easter egg appears. Persisted in
+// localStorage, throttled to once-per-session via sessionStorage.
+const WEAR_MAX = 5
+const VISITS_KEY = 'daw_visits'
+const SESSION_KEY = 'daw_session'
+
 export default function App() {
   const sheetRef = useRef<HTMLElement>(null)
 
@@ -39,6 +46,40 @@ export default function App() {
     targets.forEach((t) => io.observe(t))
     return () => io.disconnect()
   }, [])
+
+  // ---------- Decaying photocopy ----------
+  // wear 0 = pristine; climbs one step per session up to WEAR_MAX (wrecked).
+  const [wear, setWear] = useState(0)
+  const [resetting, setResetting] = useState(false)
+
+  useEffect(() => {
+    try {
+      let visits = parseInt(localStorage.getItem(VISITS_KEY) || '0', 10) || 0
+      if (!sessionStorage.getItem(SESSION_KEY)) {
+        visits = Math.min(visits + 1, WEAR_MAX + 1)
+        localStorage.setItem(VISITS_KEY, String(visits))
+        sessionStorage.setItem(SESSION_KEY, '1')
+      }
+      setWear(Math.min(Math.max(visits - 1, 0), WEAR_MAX))
+    } catch {
+      /* storage blocked (private mode / disabled) — stay pristine */
+    }
+  }, [])
+
+  function issueFreshCopy() {
+    // A clean copy: keep the session guard set so it won't immediately re-age,
+    // then let the grain + artifacts transition back out.
+    try {
+      localStorage.setItem(VISITS_KEY, '1')
+    } catch {
+      /* ignore */
+    }
+    setResetting(true)
+    setWear(0)
+    window.setTimeout(() => setResetting(false), 850)
+  }
+
+  const wearNorm = wear / WEAR_MAX
 
   // ---------- Acceptance ----------
   const [agree, setAgree] = useState(false)
@@ -80,11 +121,27 @@ export default function App() {
 
   return (
     <>
-      <main className="sheet" ref={sheetRef}>
+      <main className="sheet" ref={sheetRef} style={{ ['--wear' as string]: wearNorm } as CSSProperties}>
         <div className="docmeta">
           <span>Rev. 1 &nbsp;·&nbsp; Brooklyn, NY</span>
           <span>Effective as of first listen</span>
         </div>
+
+        {/* Replacement notice — easter egg, appears only once the copy is wrecked
+            (wear === WEAR_MAX). Placed up top so the reset is above the fold, and
+            layered above the grain (see .errata z-index) so it stays legible. */}
+        {wear >= WEAR_MAX && (
+          <div className="errata">
+            <p className="lead">Notice of Illegibility</p>
+            <p>
+              This copy has been reproduced beyond the point of legibility. Pursuant to the Band&rsquo;s goodwill, a
+              clean copy may be issued at no charge, and all prior wear is hereby waived.
+            </p>
+            <button className="errata-btn" onClick={issueFreshCopy}>
+              Issue a fresh copy
+            </button>
+          </div>
+        )}
 
         {/* ================= TITLE ================= */}
         <div className="title-block anchor" data-ink>
@@ -364,6 +421,11 @@ export default function App() {
             screen. Sits above the text/marks. Additive dark-speckle noise +
             edge-burn — no mix-blend-mode (that would checkerboard on fast scroll). */}
         <div className="xerox" aria-hidden="true" />
+
+        {/* Progressive wear artifacts (streaks, edge-burn, blown-out wash). Only
+            mounted once the paper has aged, so the pristine first visit pays
+            nothing; `resetting` keeps it around long enough to fade out. */}
+        {(wear > 0 || resetting) && <div className="wear-fx" aria-hidden="true" />}
       </main>
     </>
   )

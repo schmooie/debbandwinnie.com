@@ -281,6 +281,7 @@ h1 .t-line + .t-line{margin-top:.12em}
   .scrawl,.outnow{opacity:1}
   .s-bandname .ch{opacity:1;transform:none}
   .mark .draw{stroke-dashoffset:0}
+  .xerox,.wear-fx{transition:none}
 }
 
 /* ---------- "Xeroxed to hell" grain: overlay on the paper (scrolls with content) ---------- */
@@ -296,6 +297,49 @@ h1 .t-line + .t-line{margin-top:.12em}
     linear-gradient(90deg,rgba(0,0,0,.18),transparent 10%,transparent 90%,rgba(0,0,0,.18));
   background-size:260px 260px,150px 150px,cover;
   background-repeat:repeat,repeat,no-repeat;
-  opacity:.25;
+  /* grain thickens with the paper's wear (--wear 0..1, set on .sheet) */
+  opacity:calc(.2 + var(--wear,0) * .55);
+  transition:opacity .8s ease;
 }
-@media (max-width:560px){ .xerox{opacity:.15} }
+@media (max-width:560px){ .xerox{opacity:calc(.12 + var(--wear,0) * .45)} }
+
+/* progressive photocopy artifacts — pile on as the paper wears. Sibling of
+   .xerox inside the sheet; only mounted (in React) once wear > 0. */
+.sheet>.wear-fx{position:absolute;inset:0;z-index:6}
+.wear-fx{
+  pointer-events:none;
+  background-image:
+    /* roller streaks running down the page */
+    repeating-linear-gradient(to right,transparent 0 3px,rgba(0,0,0,.05) 3px 4px,transparent 4px 46px),
+    /* heavier burn down the left/right edges */
+    linear-gradient(90deg,rgba(0,0,0,.3),transparent 14%,transparent 86%,rgba(0,0,0,.3)),
+    /* burn along the top/bottom edges */
+    linear-gradient(0deg,rgba(0,0,0,.16),transparent 12%,transparent 88%,rgba(0,0,0,.12)),
+    /* blown-out / faded wash toward the paper colour (over-exposed copy) */
+    linear-gradient(0deg,rgba(237,235,228,.5),rgba(237,235,228,.5));
+  background-size:auto,cover,cover,cover;
+  background-repeat:repeat,no-repeat,no-repeat,no-repeat;
+  opacity:calc(var(--wear,0) * .9);
+  transition:opacity .8s ease;
+}
+
+/* replacement notice: a crisp "fresh slip" clipped to the top of a wrecked copy.
+   z-index:7 lifts it above the grain (.xerox=5, .wear-fx=6) so it stays legible,
+   and an opaque paper background makes it read as a clean insert. */
+.sheet>.errata{position:relative;z-index:7}
+.errata{
+  margin:0 0 clamp(28px,5vw,44px);
+  padding:clamp(14px,3vw,20px);
+  background:var(--paper);
+  border:1.5px solid var(--stamp);
+}
+.errata .lead{
+  font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--stamp);margin:0 0 8px;
+}
+.errata p{font-size:clamp(12px,2.6vw,14px);line-height:1.6;margin:0 0 14px}
+.errata-btn{
+  font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  background:var(--toner);color:var(--paper);border:0;padding:11px 22px;cursor:pointer;
+}
+.errata-btn:hover,.errata-btn:focus-visible{background:var(--sharpie)}
