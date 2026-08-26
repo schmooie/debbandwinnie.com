@@ -274,6 +274,13 @@ h1 .t-line + .t-line{margin-top:.12em}
   .m-pending{left:-16px;width:18px}
   .s-pending{display:none}
   .s-loud,.m-loud{display:none}
+  /* the band name is narrower/centered on mobile, so shrink + shift the arrow
+     to keep its tip on the "bb" of DEBB (desktop dims overshoot toward the &) */
+  .m-debbarrow{left:4%;top:-70px;width:112px;height:62px}
+  /* snug the Bandcamp ellipse to the row and drop the scrawl below its bottom
+     curve (desktop dims made the ellipse strike through "this one pays us") */
+  .m-bandcamp{left:-6px;top:-6px;width:calc(100% + 12px);height:calc(100% + 12px)}
+  .s-bandcamp{top:calc(100% + 9px);left:0}
 }
 
 @media (prefers-reduced-motion:reduce){
