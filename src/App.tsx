@@ -80,14 +80,6 @@ export default function App() {
 
   return (
     <>
-      {/* hand-drawn displacement filter */}
-      <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden="true">
-        <filter id="rough" x="-25%" y="-25%" width="150%" height="150%">
-          <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves={3} seed={9} result="n" />
-          <feDisplacementMap in="SourceGraphic" in2="n" scale={4} xChannelSelector="R" yChannelSelector="G" />
-        </filter>
-      </svg>
-
       <main className="sheet" ref={sheetRef}>
         <div className="docmeta">
           <span>Rev. 1 &nbsp;·&nbsp; Brooklyn, NY</span>
@@ -323,7 +315,7 @@ export default function App() {
           <div>
             <dt>Everything else</dt>
             <dd>
-              <a href="#">@debbandwinnie</a>
+              <a href="https://www.instagram.com/debbandwinnie" target="_blank">@debbandwinnie</a>
             </dd>
           </div>
         </dl>
@@ -366,6 +358,12 @@ export default function App() {
           understandings, and things said at load&#8209;in. Governed by the laws of the State of New York and the
           general customs of the venue.
         </p>
+
+        {/* Xerox grain: lives on the paper (absolutely positioned inside the
+            sheet) so it scrolls with the content instead of feeling like a dirty
+            screen. Sits above the text/marks. Additive dark-speckle noise +
+            edge-burn — no mix-blend-mode (that would checkerboard on fast scroll). */}
+        <div className="xerox" aria-hidden="true" />
       </main>
     </>
   )

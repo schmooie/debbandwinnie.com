@@ -30,12 +30,11 @@ body{
   margin:0 auto;
   background:var(--paper);
   padding:clamp(28px,6vw,64px) clamp(20px,5vw,68px) clamp(48px,7vw,80px);
-  transform:rotate(-.9deg);
+  transform:rotate(-.5deg);
   box-shadow:
     0 1px 0 rgba(255,255,255,.06),
     0 30px 60px -20px rgba(0,0,0,.8),
-    0 2px 8px rgba(0,0,0,.5),
-    inset 0 0 70px rgba(0,0,0,.055);
+    0 2px 8px rgba(0,0,0,.5);
 }
 /* photocopy edge shadow down the spine */
 .sheet::before{
@@ -43,13 +42,8 @@ body{
   background:linear-gradient(90deg,rgba(0,0,0,.16),rgba(0,0,0,0));
   pointer-events:none;
 }
-/* toner grain — plain overlay (no mix-blend-mode: it would force the whole
-   sheet into a composited blend layer that checkerboards white on fast scroll) */
-.sheet::after{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  opacity:.28;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
-}
+/* (toner grain now comes entirely from the .xerox overlay — a second full-height
+   noise layer here was redundant and doubled the paint cost during scroll) */
 .sheet > *{position:relative;z-index:1}
 
 /* ---------- document type ---------- */
@@ -188,7 +182,6 @@ h2 .num{font-family:var(--mono);font-size:11px;color:var(--toner-soft);letter-sp
 .mark{position:absolute;pointer-events:none;z-index:3;overflow:visible}
 .mark path,.mark line{
   fill:none;stroke:var(--sharpie);stroke-linecap:round;stroke-linejoin:round;
-  filter:url(#rough);
 }
 /* red proofreader's pen */
 .mark.red path,.mark.red line{stroke:var(--redpen)}
@@ -289,3 +282,20 @@ h1 .t-line + .t-line{margin-top:.12em}
   .s-bandname .ch{opacity:1;transform:none}
   .mark .draw{stroke-dashoffset:0}
 }
+
+/* ---------- "Xeroxed to hell" grain: overlay on the paper (scrolls with content) ---------- */
+.sheet>.xerox{position:absolute;inset:0;z-index:5}
+.xerox{
+  pointer-events:none;
+  background-image:
+    /* toner dust: sparse darker specks */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='d'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.4' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.9 0.9 0.9 0 -1.35'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23d)'/%3E%3C/svg%3E"),
+    /* fine toner grain */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.55 0.55 0.55 0 -0.74'/%3E%3C/filter%3E%3Crect width='150' height='150' filter='url(%23g)'/%3E%3C/svg%3E"),
+    /* photocopier edge-burn down both sides of the paper */
+    linear-gradient(90deg,rgba(0,0,0,.18),transparent 10%,transparent 90%,rgba(0,0,0,.18));
+  background-size:260px 260px,150px 150px,cover;
+  background-repeat:repeat,repeat,no-repeat;
+  opacity:.25;
+}
+@media (max-width:560px){ .xerox{opacity:.15} }
