@@ -304,7 +304,7 @@ h1 .t-line + .t-line{margin-top:.12em}
 @media (max-width:560px){ .xerox{opacity:calc(.12 + var(--wear,0) * .45)} }
 
 /* progressive photocopy artifacts — pile on as the paper wears. Sibling of
-   .xerox inside the sheet; only mounted (in React) once wear > 0. */
+   .xerox inside the sheet; only mounted once wear > 0. */
 .sheet>.wear-fx{position:absolute;inset:0;z-index:6}
 .wear-fx{
   pointer-events:none;
