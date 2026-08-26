@@ -226,7 +226,13 @@
 
   <ul class="platforms">
     <li class="anchor" data-ink>
-      <a href="https://debbandwinnie.bandcamp.com/">
+      <a
+        href="https://debbandwinnie.bandcamp.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        data-goatcounter-click="bandcamp"
+        data-goatcounter-title="Bandcamp"
+      >
         <span class="idx">(a)</span>
         <span class="name">Bandcamp</span>
         <span class="go">Listen →</span>
@@ -324,7 +330,7 @@
   <dl class="notices">
     <div class="anchor" data-ink>
       <dt>Booking</dt>
-      <dd><a href="mailto:booking@debbandwinnie.com">booking@debbandwinnie.com</a></dd>
+      <dd><a href="mailto:booking@debbandwinnie.com" data-goatcounter-click="email-booking" data-goatcounter-title="Booking email">booking@debbandwinnie.com</a></dd>
       <svg class="mark m-email" viewBox="0 0 620 46" preserveAspectRatio="none" aria-hidden="true">
         <path
           class="draw"
@@ -336,11 +342,11 @@
     </div>
     <div>
       <dt>Press</dt>
-      <dd><a href="mailto:press@debbandwinnie.com">press@debbandwinnie.com</a></dd>
+      <dd><a href="mailto:press@debbandwinnie.com" data-goatcounter-click="email-press" data-goatcounter-title="Press email">press@debbandwinnie.com</a></dd>
     </div>
     <div>
       <dt>Everything else</dt>
-      <dd><a href="https://www.instagram.com/debbandwinnie" target="_blank" rel="noopener noreferrer">@debbandwinnie</a></dd>
+      <dd><a href="https://www.instagram.com/debbandwinnie" target="_blank" rel="noopener noreferrer" data-goatcounter-click="instagram" data-goatcounter-title="Instagram">@debbandwinnie</a></dd>
     </div>
   </dl>
 
