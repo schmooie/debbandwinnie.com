@@ -30,7 +30,7 @@ body{
   margin:0 auto;
   background:var(--paper);
   padding:clamp(28px,6vw,64px) clamp(20px,5vw,68px) clamp(48px,7vw,80px);
-  transform:rotate(-.35deg);
+  transform:rotate(-.9deg);
   box-shadow:
     0 1px 0 rgba(255,255,255,.06),
     0 30px 60px -20px rgba(0,0,0,.8),
@@ -43,10 +43,11 @@ body{
   background:linear-gradient(90deg,rgba(0,0,0,.16),rgba(0,0,0,0));
   pointer-events:none;
 }
-/* toner grain */
+/* toner grain — plain overlay (no mix-blend-mode: it would force the whole
+   sheet into a composited blend layer that checkerboards white on fast scroll) */
 .sheet::after{
   content:"";position:absolute;inset:0;pointer-events:none;
-  mix-blend-mode:multiply;opacity:.5;
+  opacity:.28;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
 }
 .sheet > *{position:relative;z-index:1}
@@ -174,7 +175,7 @@ h2 .num{font-family:var(--mono);font-size:11px;color:var(--toner-soft);letter-sp
   border:2.5px solid var(--stamp);color:var(--stamp);
   font-family:var(--mono);font-weight:700;font-size:clamp(11px,2.4vw,14px);
   letter-spacing:.22em;padding:9px 16px;transform:rotate(-11deg);
-  opacity:.62;mix-blend-mode:multiply;pointer-events:none;
+  opacity:.62;pointer-events:none;
 }
 
 .fineprint{
@@ -192,20 +193,23 @@ h2 .num{font-family:var(--mono);font-size:11px;color:var(--toner-soft);letter-sp
 /* red proofreader's pen */
 .mark.red path,.mark.red line{stroke:var(--redpen)}
 .scrawl.red{color:var(--redpen)}
-.mark .draw{stroke-dasharray:var(--len,900);stroke-dashoffset:var(--len,900)}
-/* fill-mode:both + explicit resting state so the drawn line survives even if
-   mobile Safari drops the post-animation forwards fill (would otherwise snap back) */
-.inked .draw{animation:ink .72s cubic-bezier(.42,.03,.32,1) both;stroke-dashoffset:0}
-.inked .d2{animation-delay:.2s}
-.inked .d3{animation-delay:.38s}
-@keyframes ink{from{stroke-dashoffset:var(--len,900)}to{stroke-dashoffset:0}}
+/* Reveal via CSS transitions, not keyframe animations: a transition's end state
+   is a plain property value applied by .inked, so there's no animation-fill-mode
+   for mobile Safari/Chrome to drop — the marks can't snap back to hidden. */
+.mark .draw{
+  stroke-dasharray:var(--len,900);stroke-dashoffset:var(--len,900);
+  transition:stroke-dashoffset .72s cubic-bezier(.42,.03,.32,1);
+}
+.mark .draw.d2{transition-delay:.2s}
+.mark .draw.d3{transition-delay:.38s}
+.inked .draw{stroke-dashoffset:0}
 
 .scrawl{
   position:absolute;font-family:var(--marker);color:var(--sharpie);
   line-height:1.05;z-index:3;pointer-events:none;opacity:0;
+  transition:opacity .42s ease .44s;
 }
-.inked .scrawl{animation:appear .42s ease .44s both;opacity:1}
-@keyframes appear{from{opacity:0}to{opacity:1}}
+.inked .scrawl{opacity:1}
 
 /* placed marks */
 .anchor{position:relative}
@@ -219,22 +223,22 @@ h1 .t-line + .t-line{margin-top:.12em}
   font-size:clamp(30px,8.5vw,54px);letter-spacing:.01em;white-space:nowrap;
   opacity:1;  /* letters handle their own reveal */
 }
-/* band name writes in, letter by letter (per-letter delay set inline) */
-.s-bandname .ch{display:inline-block;opacity:0}
-.inked .s-bandname{animation:none}
-.inked .s-bandname .ch{animation:letterIn .34s cubic-bezier(.3,.7,.25,1) both;opacity:1;transform:none}
-@keyframes letterIn{
-  from{opacity:0;transform:translateY(.22em) rotate(-8deg) scale(.84)}
-  to{opacity:1;transform:none}
+/* band name writes in, letter by letter (per-letter transition-delay set inline) */
+.s-bandname .ch{
+  display:inline-block;opacity:0;
+  transform:translateY(.22em) rotate(-8deg) scale(.84);
+  transition:opacity .34s cubic-bezier(.3,.7,.25,1),transform .34s cubic-bezier(.3,.7,.25,1);
 }
+.inked .s-bandname .ch{opacity:1;transform:none}
 /* "new single out now" — flows between title and subtitle (reflow-proof) */
 .outnow{
   font-family:var(--marker);color:var(--sharpie);
   font-size:clamp(15px,3.6vw,19px);line-height:1;
   text-align:center;transform:rotate(-1.2deg);
   margin:clamp(14px,3vw,22px) 0 0;opacity:0;
+  transition:opacity .42s ease .44s;
 }
-.inked .outnow{animation:appear .42s ease .44s both;opacity:1}
+.inked .outnow{opacity:1}
 
 /* red proofreader callout on the band name */
 .s-debbnote{
@@ -280,9 +284,8 @@ h1 .t-line + .t-line{margin-top:.12em}
 }
 
 @media (prefers-reduced-motion:reduce){
-  .inked .draw{animation:none;stroke-dashoffset:0}
-  .inked .scrawl,.inked .outnow{animation:none;opacity:1}
-  .draw{stroke-dashoffset:0}
+  .scrawl,.outnow,.s-bandname .ch,.mark .draw{transition:none}
   .scrawl,.outnow{opacity:1}
-  .s-bandname .ch{animation:none;opacity:1;transform:none}
+  .s-bandname .ch{opacity:1;transform:none}
+  .mark .draw{stroke-dashoffset:0}
 }

@@ -126,7 +126,7 @@ export default function App() {
                 key={i}
                 className="ch"
                 aria-hidden="true"
-                style={{ animationDelay: `${delay.toFixed(3)}s` }}
+                style={{ transitionDelay: `${delay.toFixed(3)}s` }}
               >
                 {c === ' ' ? ' ' : c}
               </span>
