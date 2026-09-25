@@ -249,7 +249,6 @@ h1 .t-line + .t-line{margin-top:.12em}
   font-size:clamp(12px,3vw,15px);white-space:nowrap;
 }
 
-.m-pending{left:-30px;top:2px;width:26px;height:calc(100% - 4px)}
 .s-pending{
   top:calc(100% + 6px);right:6px;transform:rotate(-3deg);
   font-size:clamp(12px,3vw,15px);white-space:nowrap;
@@ -271,7 +270,6 @@ h1 .t-line + .t-line{margin-top:.12em}
   .clause .ref{width:36px}
   .platforms,.notices{padding-left:0}
   .datecard{gap:16px}
-  .m-pending{left:-16px;width:18px}
   .s-pending{display:none}
   .s-loud,.m-loud{display:none}
   /* the band name is narrower/centered on mobile, so shrink + shift the arrow

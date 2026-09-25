@@ -118,7 +118,7 @@
       .then(execute)
       .catch(() => {
         status = 'idle'
-        note = 'That didn’t go through. Try again, or email press@debbandwinnie.com and we’ll add you by hand.'
+        note = 'That didn’t go through. Try again, or email debbandwinnie@gmail.com and we’ll add you by hand.'
       })
   }
 </script>
@@ -250,35 +250,50 @@
   </ul>
 
   <p class="clause" style="margin-top: 26px">
-    <span class="ref">2.3</span> The channels enumerated below are contemplated by this Agreement but are not yet in
-    effect. They shall come into effect without further notice or amendment.
+    <span class="ref">2.3</span> The license may also be exercised through the channels enumerated below. The Band
+    notes, without objection, that these remit fractions of a cent per play.
   </p>
 
-  <ul class="platforms pending-set anchor" data-ink>
-    <li class="pending">
-      <span class="idx">(b)</span>
-      <span class="name">Spotify</span>
-      <span class="go">Pending</span>
+  <ul class="platforms">
+    <li>
+      <a
+        href="https://open.spotify.com/artist/3155DtEZMVSqAnWrZuaHFW"
+        target="_blank"
+        rel="noopener noreferrer"
+        data-goatcounter-click="spotify"
+        data-goatcounter-title="Spotify"
+      >
+        <span class="idx">(b)</span>
+        <span class="name">Spotify</span>
+        <span class="go">Listen &rarr;</span>
+      </a>
     </li>
-    <li class="pending">
-      <span class="idx">(c)</span>
-      <span class="name">Apple Music</span>
-      <span class="go">Pending</span>
+    <li>
+      <a
+        href="https://music.apple.com/us/artist/debb-and-winnie/6806206145"
+        target="_blank"
+        rel="noopener noreferrer"
+        data-goatcounter-click="apple-music"
+        data-goatcounter-title="Apple Music"
+      >
+        <span class="idx">(c)</span>
+        <span class="name">Apple Music</span>
+        <span class="go">Listen &rarr;</span>
+      </a>
     </li>
-    <li class="pending">
-      <span class="idx">(d)</span>
-      <span class="name">YouTube</span>
-      <span class="go">Pending</span>
+    <li>
+      <a
+        href="https://music.youtube.com/channel/UCp93hMdLPW9VzsyKWflU1pA"
+        target="_blank"
+        rel="noopener noreferrer"
+        data-goatcounter-click="youtube-music"
+        data-goatcounter-title="YouTube Music"
+      >
+        <span class="idx">(d)</span>
+        <span class="name">YouTube Music</span>
+        <span class="go">Listen &rarr;</span>
+      </a>
     </li>
-    <svg class="mark m-pending" viewBox="0 0 60 150" preserveAspectRatio="none" aria-hidden="true">
-      <path
-        class="draw"
-        style="--len: 400"
-        stroke-width="2.8"
-        d="M44,6 C22,8 14,14 12,40 C10,62 8,72 3,75 C9,79 11,90 12,110 C14,136 24,142 44,144"
-      />
-    </svg>
-    <div class="scrawl s-pending">any day now</div>
   </ul>
 
   <!-- ================= 3. PERFORMANCES ================= -->
@@ -329,8 +344,8 @@
   <h2><span class="num">5.</span> Notices</h2>
   <dl class="notices">
     <div class="anchor" data-ink>
-      <dt>Booking</dt>
-      <dd><a href="mailto:booking@debbandwinnie.com" data-goatcounter-click="email-booking" data-goatcounter-title="Booking email">booking@debbandwinnie.com</a></dd>
+      <dt>Booking &amp; press</dt>
+      <dd><a href="mailto:debbandwinnie@gmail.com" data-goatcounter-click="email" data-goatcounter-title="Email">debbandwinnie@gmail.com</a></dd>
       <svg class="mark m-email" viewBox="0 0 620 46" preserveAspectRatio="none" aria-hidden="true">
         <path
           class="draw"
@@ -339,10 +354,6 @@
           d="M18,10 C170,4 470,6 600,11 C606,20 604,30 598,38 C450,44 160,42 20,36 C13,28 12,18 18,10"
         />
       </svg>
-    </div>
-    <div>
-      <dt>Press</dt>
-      <dd><a href="mailto:press@debbandwinnie.com" data-goatcounter-click="email-press" data-goatcounter-title="Press email">press@debbandwinnie.com</a></dd>
     </div>
     <div>
       <dt>Everything else</dt>
